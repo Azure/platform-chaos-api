@@ -1,8 +1,8 @@
-# azure-chaos-api
+# platform-chaos-api
 
-web frontend for [azure-chaos](https://github.com/bengreenier/azure-chaos). :cloud:
+web frontend for [Platform Chaos](https://github.com/azure/platform-chaos). :cloud:
 
-This simply surfaces the `azchaos` functionality via authenticated API.
+This simply surfaces the `chaos` functionality via authenticated API.
 By default, this runs on port `3000` - but that can be configured with the `PORT` environment variable.
 
 To configure this authentication layer, use the following environment variables:
