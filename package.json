@@ -1,0 +1,34 @@
+{
+  "name": "azure-chaos-frontend",
+  "version": "1.0.0",
+  "description": "web frontend for azure-chaos",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bengreenier/azure-chaos-frontend.git"
+  },
+  "keywords": [
+    "azure",
+    "choas"
+  ],
+  "author": "Ben Greenier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bengreenier/azure-chaos-frontend/issues"
+  },
+  "homepage": "https://github.com/bengreenier/azure-chaos-frontend#readme",
+  "devDependencies": {
+    "mocha": "^5.0.0",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "azure-chaos": "^1.1.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "passport": "^0.4.0",
+    "passport-azure-ad": "^3.0.10"
+  }
+}
