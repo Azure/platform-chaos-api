@@ -1,7 +1,7 @@
 # platform-chaos-api
-[![Build Status](https://travis-ci.org/azure/platform-chaos-api.svg?branch=master)](https://travis-ci.org/azure/platform-chaos)
+[![Build Status](https://travis-ci.org/Azure/platform-chaos-api.svg?branch=master)](https://travis-ci.org/Azure/platform-chaos-api)
 
-Web frontend for [Platform Chaos](https://github.com/azure/platform-chaos). :cloud:
+An API that surfaces the functionality of the [CLI](https://github.com/Azure/platform-chaos-cli) for [Platform Chaos](https://github.com/Azure/platform-chaos). :cloud:
 
 ![hero image](.github/hero.png)
 
@@ -68,7 +68,7 @@ Deletes an extension. Takes `extId` (the name of the extension) as part of the p
 
 ## Related Projects
 
-* [platform-chaos](https://github.com/Azure/platform-chaos) - AA node sdk for building services capable of injecting chaos into PaaS offerings.
+* [platform-chaos](https://github.com/Azure/platform-chaos) - A Node.js SDK for building services capable of injecting chaos into PaaS offerings.
 * [platform-chaos-cli](https://github.com/Azure/platform-chaos-cli) - A tool for introducing chaos into Azure PaaS offerings using configurable extensions.
 
 # Contributing
@@ -98,18 +98,6 @@ npm install
 ```
 
 Now you're ready to begin contributing!
-
-### Testing
-
-To run the tests for this project, first ensure you've installed the [requirements](#development-requirements). Then use npm to run the tests locally:
-
-```
-npm test
-```
-
-Note that this command is meant to be run from the project directory. That is,
-the folder that you cloned the project into (likey `platform-chaos-api`). 
-
 
 ### Legal
 
