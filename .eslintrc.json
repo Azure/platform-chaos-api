@@ -1,0 +1,11 @@
+{
+    "extends": "eslint:recommended",
+    "rules": {
+        "linebreak-style": ["error", "unix"],
+        "quotes": ["error", "single"],
+        "semi": ["error", "never"]
+    },
+    "parserOptions": {
+        "ecmaVersion": 6
+    }
+}
