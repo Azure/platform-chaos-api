@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/azure/platform-chaos-api#readme",
   "devDependencies": {
+    "eslint": "^5.4.0",
     "mocha": "^5.0.0",
     "supertest": "^3.0.0"
   },
