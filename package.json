@@ -4,7 +4,7 @@
   "description": "API for Platform Chaos",
   "main": "index.js",
   "scripts": {
-    "test": "node test",
+    "test": "mocha",
     "start": "node index.js"
   },
   "repository": {
@@ -25,13 +25,16 @@
   "homepage": "https://github.com/azure/platform-chaos-api#readme",
   "devDependencies": {
     "mocha": "^5.0.0",
-    "supertest": "^3.1.0"
+    "supertest": "^3.2.0"
   },
   "dependencies": {
     "azure-chaos": "^1.1.1",
     "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
     "express": "^4.16.2",
     "passport": "^0.4.0",
-    "passport-azure-ad": "^3.0.10"
+    "passport-azure-ad": "^3.0.10",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0"
   }
 }
