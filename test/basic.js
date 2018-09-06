@@ -1,7 +1,6 @@
 /* eslint-env node, mocha */
 const request = require('supertest')
 const fs = require('fs')
-const expect = require('chai').expect
 const server = require('../lib/app')
 const constants = require('../lib/constants')
 
@@ -25,25 +24,14 @@ describe('GET /extensions', function () {
   it('should require authorization', function (done) {
     request(app)
       .get('/extensions')
-      .expect(401)
-      .end(function (err, res) {
-        if (err) return done(err)
-        done()
-      })
+      .expect(401, done)
   })
 
   it('responds with an empty array because there are no registered extensions', function (done) {
     request(app)
       .get('/extensions')
       .set('Authorization', bearerToken)
-      .expect(200)
-      .end(function (err, res) {
-        if (err) return done(err)
-        expect(res.body)
-          .to.be.an.instanceof(Array)
-          .and.to.have.length(0)
-        done()
-      })
+      .expect(200, [], done)
   })
 })
 
@@ -100,11 +88,7 @@ describe('POST /extensions', function () {
       .set('Authorization', bearerToken)
       .set('Content-Type', 'application/json')
       .send(body2)
-      .expect(200)
-      .end(function (err, res) {
-        if (err) return done(err)
-        done()
-      })
+      .expect(200, done)
   })
 
   it('can get both of the registered extensions', function (done) {
