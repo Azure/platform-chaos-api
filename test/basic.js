@@ -3,10 +3,12 @@ const request = require('supertest')
 const fs = require('fs')
 const expect = require('chai').expect
 const server = require('../lib/app')
+const constants = require('../lib/constants')
 
 const app = server({ isProd: false })
 
 const extensionsPath = `${__dirname}/../webapp-extension-store.json`
+const bearerToken = `bearer ${constants.MOCK_TOKEN}`
 
 describe('GET /extensions', function () {
   before(function () {
@@ -33,7 +35,7 @@ describe('GET /extensions', function () {
   it('responds with an empty array because there are no registered extensions', function (done) {
     request(app)
       .get('/extensions')
-      .set('Authorization', 'bearer ' + 'mock-token')
+      .set('Authorization', bearerToken)
       .expect(200)
       .end(function (err, res) {
         if (err) return done(err)
@@ -79,7 +81,7 @@ describe('POST /extensions', function () {
   it('creates a new extension with payload posted', function (done) {
     request(app)
       .post('/extensions')
-      .set('Authorization', 'bearer ' + 'mock-token')
+      .set('Authorization', bearerToken)
       .set('Content-Type', 'application/json')
       .send(body)
       .expect(200, done)
@@ -88,14 +90,14 @@ describe('POST /extensions', function () {
   it('can get the extension that just registered', function (done) {
     request(app)
       .get('/extensions')
-      .set('Authorization', 'bearer ' + 'mock-token')
+      .set('Authorization', bearerToken)
       .expect(200, [body], done)
   })
 
   it('creates a second extension with payload posted', function (done) {
     request(app)
       .post('/extensions')
-      .set('Authorization', 'bearer ' + 'mock-token')
+      .set('Authorization', bearerToken)
       .set('Content-Type', 'application/json')
       .send(body2)
       .expect(200)
@@ -108,14 +110,14 @@ describe('POST /extensions', function () {
   it('can get both of the registered extensions', function (done) {
     request(app)
       .get('/extensions')
-      .set('Authorization', 'bearer ' + 'mock-token')
+      .set('Authorization', bearerToken)
       .expect(200, [body, body2], done)
   })
 
   it('will not create an extension if name is duplicate', function (done) {
     request(app)
       .post('/extensions')
-      .set('Authorization', 'bearer ' + 'mock-token')
+      .set('Authorization', bearerToken)
       .set('Content-Type', 'application/json')
       .send(body)
       .expect(500, done)
