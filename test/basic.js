@@ -1,4 +1,4 @@
-/* global it, describe, before */
+/* eslint-env node, mocha */
 const request = require('supertest')
 const fs = require('fs')
 const expect = require('chai').expect
