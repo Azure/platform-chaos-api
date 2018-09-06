@@ -99,6 +99,17 @@ npm install
 
 Now you're ready to begin contributing!
 
+### Testing and Linting
+
+To run the tests for this project, use npm to run the linter and the tests locally.
+```
+npm test
+```
+Note this command is meant to be run from the project directory (the folder you cloned the project into). It will run the linter and then if the linter pass is successful, then the tests will run. To run the linter separately from the tests, run:
+```
+npm run lint
+```
+
 ### Legal
 
 Most contributions require you to agree to a
