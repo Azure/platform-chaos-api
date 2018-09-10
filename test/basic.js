@@ -107,3 +107,14 @@ describe('POST /extensions', function () {
       .expect(500, done)
   })
 })
+
+after(function () {
+  if (fs.existsSync(extensionsPath)) {
+    fs.unlink(extensionsPath, function (error) {
+      if (error) {
+        throw error
+      }
+      console.log('Deleted extension store.')
+    })
+  }
+})

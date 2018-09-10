@@ -1,0 +1,125 @@
+openapi: "3.0.0"
+info:
+  description:
+  version: "1.0.0"
+  title: "Azure platform-chaos-api"
+  license:
+    name: "MIT"
+    url: "https://github.com/Azure/platform-chaos-api/blob/master/LICENSE"
+  schemes:
+  - "https"
+paths:
+  /extensions:
+    get:
+      description: Returns all registered extensions, as an array of JSON objects.
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: An array of extensions that have been created, with each extension as a separate JSON object.
+          examples:
+            application/json:
+              [{"name":"test1","uri":"https://test1.com","desc":"test1Desc"},{"name":"test2","uri":"https://test2.com","desc":"test2Desc"}]
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        500:
+          $ref: '#/components/schemas/InternalServerError'
+    post:
+      description: Creates a new extension with `name`, `desc`, and `uri` fields.
+      parameters:
+        - in: body
+          name: Extension
+          description: The new extension to create, with the three required fields `name`, `desc`, and `uri`.
+          schema:
+            $ref: "#/components/schemas/Extension"
+      responses:
+        200:
+          description: Extension registered successfully
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        500:
+          description: Internal Server Error (possibly that an extension with given name already exists)
+          examples:
+            application/json:
+              { "error": "Extension named 'test' already exists" }
+  /extensions/{extId}/start:
+    post:
+      description: Starts the extension with a `name` field that matches `extId`.
+      parameters:
+        - in: path
+          name: extId
+          required: true
+          schema:
+            type: string
+          description: The name of the extension
+      responses:
+        200:
+          description: Extension stopped successfully
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        500:
+          $ref: '#/components/schemas/InternalServerError'
+  /extensions/{extId}/stop:
+    post:
+      description: Stops the extension with a `name` field that matches `extId`.
+      parameters:
+        - in: path
+          name: extId
+          required: true
+          schema:
+            type: string
+          description: The name of the extension
+      responses:
+        200:
+          description: Extension stopped successfully
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        500:
+          $ref: '#/components/schemas/InternalServerError'
+  /extensions/{extId}:
+    delete:
+      description: Deletes the extension with a `name` field that matches `extId`.
+      parameters:
+        - in: path
+          name: extId
+          required: true
+          schema:
+            type: string
+          description: The name of the extension
+      responses:
+        200:
+          description: Extension deleted successfully
+        401:
+          $ref: '#/components/responses/UnauthorizedError'
+        500:
+          $ref: '#/components/schemas/InternalServerError'
+components:
+  schemas:
+    Extension:
+      type: object
+      required:
+        - name
+        - desc
+        - uri
+      properties:
+        name:
+          type: string
+          example: testName
+        desc:
+          type: string
+          example: Test extension description
+        uri:
+          type: string
+          example: https://www.testuri.com
+    InternalServerError:
+      description: Internal Server Error
+      type: object
+      properties:
+        error:
+          type: string
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+externalDocs:
+  description: "Find out more about azure-chaos-api"
+  url: "https://github.com/Azure/platform-chaos-api"
