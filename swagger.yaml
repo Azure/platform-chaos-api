@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  description: An API that surfaces the fuctionality of the CLI for Platform Chaos.
+  description: An API that surfaces the fuctionality of the CLI for [Platform Chaos](https://www.github.com/Azure/platform-chaos).
   version: "1.0.0"
   title: "Azure platform-chaos-api"
   license:
