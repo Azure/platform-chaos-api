@@ -16,6 +16,8 @@ To configure this authentication layer, use the following environment variables:
 
 See [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad#5212-options) for more details.
 
+To configure a deployment of this repo, refer to the [wiki page](https://github.com/Azure/platform-chaos-api/wiki/Walkthrough:-Deploy-and-Authenticate) which contains detailed instructions.
+
 ## API
 
 > All endpoints require `Authentication: Bearer <token>` header authentication values for the configured AzureAD application.
