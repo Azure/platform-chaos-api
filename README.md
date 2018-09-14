@@ -1,5 +1,6 @@
 # platform-chaos-api
 [![Build Status](https://travis-ci.org/Azure/platform-chaos-api.svg?branch=master)](https://travis-ci.org/Azure/platform-chaos-api)
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
 An API that surfaces the functionality of the [CLI](https://github.com/Azure/platform-chaos-cli) for [Platform Chaos](https://github.com/Azure/platform-chaos). :cloud:
 
