@@ -1,5 +1,6 @@
 # platform-chaos-api
 [![Build Status](https://travis-ci.org/Azure/platform-chaos-api.svg?branch=master)](https://travis-ci.org/Azure/platform-chaos-api)
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
 An API that surfaces the functionality of the [CLI](https://github.com/Azure/platform-chaos-cli) for [Platform Chaos](https://github.com/Azure/platform-chaos). :cloud:
 
@@ -15,6 +16,8 @@ To configure this authentication layer, use the following environment variables:
 + `AUTH_AUDIENCE` - the AzureAD audience
 
 See [passport-azure-ad](https://github.com/AzureAD/passport-azure-ad#5212-options) for more details.
+
+To configure a deployment of this repo, refer to the [wiki page](https://github.com/Azure/platform-chaos-api/wiki/Walkthrough:-Deploy-and-Authenticate) which contains detailed instructions.
 
 ## API
 
