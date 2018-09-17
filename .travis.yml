@@ -2,7 +2,3 @@ language: node_js
 node_js:
   - "node"
   - "lts/*"
-env:
-  - NODE_ENV=test
-script:
-  - npm test
