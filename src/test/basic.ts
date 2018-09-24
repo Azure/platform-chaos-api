@@ -7,7 +7,7 @@ import constants from '../lib/constants'
 
 const app = server({ isProd: false })
 
-const extensionsPath = `${__dirname}/../webapp-extension-store.json`
+const extensionsPath = `${__dirname}/../../webapp-extension-store.json`
 const bearerToken = `bearer ${constants.MOCK_TOKEN}`
 
 describe('GET /extensions', () => {
