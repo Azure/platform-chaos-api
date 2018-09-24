@@ -1,12 +1,13 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const passport = require('passport')
-const MockStrategy = require('passport-http-bearer').Strategy
-const BearerStrategy = require('passport-azure-ad').BearerStrategy
-const azureChaos = require('azure-chaos')
-const constants = require('../lib/constants')
+import * as azureChaos from 'azure-chaos'
+import * as bodyParser from 'body-parser'
+import * as express from 'express'
+import * as passport from 'passport'
+import { BearerStrategy } from 'passport-azure-ad'
+import { Strategy as MockStrategy } from 'passport-http-bearer'
 
-module.exports = (opts) => {
+import constants from '../lib/constants'
+
+export default (opts) => {
   // configure the factory for runtime
   // this injects our production dependencies
   azureChaos.factory.RequestProcessor.configure({
@@ -17,6 +18,7 @@ module.exports = (opts) => {
     fsLocation: './webapp-extension-store.json'
   })
   azureChaos.factory.Logger.configure({
+    // tslint:disable-next-line
     logImpl: console.log
   })
   azureChaos.factory.AzureAuthenticator.configure({
@@ -30,18 +32,18 @@ module.exports = (opts) => {
   if (opts && opts.isProd) {
     // in production, use Bearer Strategy for auth
     passport.use(new BearerStrategy({
-      identityMetadata: 'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
-      clientID: opts.authClientId,
       audience: opts.authAudience,
+      clientID: opts.authClientId,
+      identityMetadata: 'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
       issuer: opts.authIssuer,
       loggingLevel: 'error'
-    }, function (token, done) {
+    }, (token, done) => {
       done(null, token)
     }))
   } else {
     // if !isProd the test suite is being run so mock authentication
     const mockStrategy = new MockStrategy(
-      function (token, done) {
+      (token, done) => {
         if (token === constants.MOCK_TOKEN) {
           done(null, {})
         } else {
@@ -56,7 +58,7 @@ module.exports = (opts) => {
   app.use(passport.authorize('oauth-bearer', { session: false }))
 
   app.get('/extensions', (req, res) => {
-    registry.getAll().then(exts => {
+    registry.getAll().then((exts) => {
       res.status(200).send(exts)
     }, (err) => {
       res.status(500).send({ error: err })
@@ -65,7 +67,7 @@ module.exports = (opts) => {
 
   app.get('/extensions/:extId', (req, res) => {
     registry.get({ extensionName: req.params.extId })
-      .then(e => {
+      .then((e) => {
         res.status(200).send(e)
       }, (err) => {
         res.status(500).send({ error: err })
@@ -80,13 +82,14 @@ module.exports = (opts) => {
       .get({ extensionName: req.params.extId })
       .then((ext) => {
         return proc.start({
-          extensionUri: ext.uri,
+          accessToken: req.body.accessToken,
           authKey: req.query.code,
-          resources: req.body.resources,
-          accessToken: req.body.accessToken
+          extensionUri: ext.uri,
+          resources: req.body.resources
         })
-      }).then((res) => {
-        res.status(res.statusCode).send(res.body)
+      })
+      .then((result) => {
+        res.status(result.statusCode).send(result.body)
       }, (err) => {
         res.status(500).send({ error: err })
       })
@@ -100,13 +103,13 @@ module.exports = (opts) => {
       .get({ extensionName: req.params.extId })
       .then((ext) => {
         return proc.stop({
-          extensionUri: ext.uri,
+          accessToken: req.body.accessToken,
           authKey: req.query.code,
-          resources: req.body.resources,
-          accessToken: req.body.accessToken
+          extensionUri: ext.uri,
+          resources: req.body.resources
         })
-      }).then((res) => {
-        res.status(res.statusCode).send(res.body)
+      }).then((result) => {
+        res.status(result.statusCode).send(result.body)
       }, (err) => {
         res.status(500).send({ error: err })
       })
@@ -127,9 +130,9 @@ module.exports = (opts) => {
   // {name, uri, desc}
   app.post('/extensions', bodyParser.json(), (req, res) => {
     registry.register({
+      extensionDesc: req.body.desc,
       extensionName: req.body.name,
-      extensionUri: req.body.uri,
-      extensionDesc: req.body.desc
+      extensionUri: req.body.uri
     }).then(() => {
       res.status(200).end()
     }, (err) => {
