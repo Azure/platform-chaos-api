@@ -4,7 +4,7 @@
   "description": "API for Platform Chaos",
   "main": "dist/index.js",
   "scripts": {
-    "lint": "npx tslint 'src/**/*.ts'",
+    "lint": "npx tslint --project .",
     "test": "npm run lint && mocha dist/test/",
     "compile": "npm run cleanup && npx tsc",
     "cleanup": "rimraf dist/"
