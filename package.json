@@ -4,14 +4,10 @@
   "description": "API for Platform Chaos",
   "main": "dist/index.js",
   "scripts": {
-    "lint": "npx tslint -c tsconfig.json 'src/**/*.ts'",
-    "pretest": "npm run cleanup && npm run compile",
-    "test": "npm run lint && npm run test-only",
-    "posttest": "npm run cleanup",
-    "test-only": "mocha dist/test/",
-    "compile": "npx tsc -p tsconfig.json",
-    "cleanup": "rimraf dist/",
-    "start": "node dist/index.js"
+    "lint": "npx tslint 'src/**/*.ts'",
+    "test": "npm run lint && mocha dist/test/",
+    "compile": "npm run cleanup && npx tsc",
+    "cleanup": "rimraf dist/"
   },
   "repository": {
     "type": "git",

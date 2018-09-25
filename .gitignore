@@ -61,3 +61,6 @@ typings/
 
 # vs code configuration file
 .vscode/
+
+# Typescript
+dist/
